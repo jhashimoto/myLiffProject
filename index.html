@@ -78,16 +78,17 @@
     <h2 id="profile_name"></h2>
     <p>LIFFの作成を色々と試すためのページです。</p>
     
-    /* シェアターゲットピッカー */
-    <button class="btn" id="shareFriends">share to friends</button><br>
+    シェアターゲットピッカー</br>
+    <button class="btn" id="shareFriends">share to friends</button><br></br>
     
-    /* 閉じるボタン */
-    <button class="btn" id="closeWindowButton">close</button>
+    閉じるボタン</br>
+    <button class="btn" id="closeWindowButton">close</button></br>
     
   </body>
   
   <script>
     const liffId = "1654450813-w7bodxYN"
+    const liffUrl = "https://liff.line.me/1654450813-w7bodxYN"
     const Name = document.getElementById('profile_name');
     const Img = document.getElementById("profile_img");
  
@@ -123,7 +124,7 @@
         liff.shareTargetPicker(
           [{
             type: 'text',
-            text: 'https://liff.line.me/1654391458-ZXkyBBy8'
+            text: liffUrl
           }]
         ).then(function() {
         }).catch(function(error) {

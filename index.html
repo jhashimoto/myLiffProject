@@ -92,13 +92,6 @@
     const Name = document.getElementById('profile_name');
     const Img = document.getElementById("profile_img");
  
-    liff.init({liffId}).then(() => {
-      if (liff.isLoggedIn()) {
-      }
-      else{
-        liff.login();
-      }
-    })
     
     liff.init({liffId}).then(() => {
       if (liff.isLoggedIn()) {

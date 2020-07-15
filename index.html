@@ -91,6 +91,24 @@
         liff.login();
       }
     })
+    
+    liff.init({liffId}).then(() => {
+      if (liff.isLoggedIn()) {
+        liff.getProfile()
+          .then(profile => {
+            const name = profile.displayName;
+            const pic = profile.pictureUrl;
+            Name.innerHTML = name;
+            Img.src = pic;
+          })
+          .catch((err) => {
+            console.log('error', err);
+          });
+      }
+      else{
+        liff.login();
+      }
+    })
   </script>
   
 </html>

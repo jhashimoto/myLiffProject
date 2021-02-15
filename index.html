@@ -97,6 +97,9 @@
     閉じるボタン<br>
     <button class="btn" id="closeWindowButton">close</button><br>
     
+    QRコードリーダーカメラ起動
+    <video id="vidPhoVideo" autoplay playsinline></video>
+    
   </body>
   
   <script>
@@ -243,6 +246,24 @@
     document.getElementById('closeWindowButton').addEventListener('click', closeWindow)
     
   
+    
+   /* QR camera */
+    const video = document.getElementById("vidPhoVideo");
+    const constraints = {
+    audio: false,
+    video: {
+        facingMode: { exact: "environment" }
+    }
+    };
+
+    navigator.mediaDevices.getUserMedia(constraints)
+      .then((stream) => {
+        video.srcObject = stream;
+      })
+      .catch((err) => {
+        alert(err);
+      });
+    
   </script>
   
 </html>

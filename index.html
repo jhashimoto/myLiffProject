@@ -100,6 +100,16 @@
     QRコードリーダーカメラ起動<br>
     <video id="vidPhoVideo" autoplay playsinline></video><br>
     <canvas id="js-canvas"></canvas><br>
+    <div id="js-modal" class="modal-overlay">
+    <div class="modal">
+       <div class="modal-cnt">
+          <span class="modal-title">読み取り結果</span>
+          <span id="js-result" class="modal-result"></span>
+        </div>
+        <a href="" id="js-link" class="modal-btn" target="_blank">開く</a>
+        <button type="button" id="js-modal-close" class="modal-btn">閉じる</button>
+      </div>
+    </div>
     
   </body>
   
@@ -286,6 +296,34 @@
         setTimeout(() => { checkImage() }, 200)
     }
 }
+    const openModal = function(url) {
+    document.querySelector('#js-result').innerText = url
+    document.querySelector('#js-link').setAttribute('href', url)
+    document.querySelector('#js-modal').classList.add('is-show')
+}
+
+document.querySelector('#js-modal-close')
+    .addEventListener('click', () => {
+        document.querySelector('#js-modal').classList.remove('is-show')
+        checkImage()
+    })
+    
+    .modal-overlay {
+    display: none;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .7);
+}
+
+.modal-overlay.is-show {
+    display: flex;
+}
+    
     
   </script>
   

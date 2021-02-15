@@ -98,13 +98,14 @@
     <button class="btn" id="closeWindowButton">close</button><br>
     
     QRコードリーダーカメラ起動<br>
-    <div class="reader">
-      <video id="js-video" class="reader-video" autoplay playsinline></video>
-    </div>
+    <video id="js-video" class="reader-video" autoplay playsinline></video>
     
     <br>
     
-    <canvas id="js-canvas"></canvas><br>
+    <div style="display:none">
+      <canvas id="js-canvas"></canvas>
+    </div>
+    
     <div id="js-modal" class="modal-overlay">
     <div class="modal">
        <div class="modal-cnt">
@@ -289,23 +290,23 @@
     const ctx = canvas.getContext('2d')
 
     const checkImage = () => {
-    // 取得している動画をCanvasに描画
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+      // 取得している動画をCanvasに描画
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
 
-    // Canvasからデータを取得
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+      // Canvasからデータを取得
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
 
-    // jsQRに渡す
-    const code = jsQR(imageData.data, canvas.width, canvas.height)
+      // jsQRに渡す
+      const code = jsQR(imageData.data, canvas.width, canvas.height)
 
-    // QRコードの読み取りに成功したらモーダル開く
-    // 失敗したら再度実行
-    if (code) {
-        openModal(code.data)
-    } else {
-        setTimeout(() => { checkImage() }, 200)
+      // QRコードの読み取りに成功したらモーダル開く
+      // 失敗したら再度実行
+      if (code) {
+          openModal(code.data)
+      } else {
+          setTimeout(() => { checkImage() }, 200)
+      }
     }
-}
     const openModal = function(url) {
     document.querySelector('#js-result').innerText = url
     document.querySelector('#js-link').setAttribute('href', url)

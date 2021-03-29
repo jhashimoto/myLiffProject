@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>HTML5のaudio要素で効果音を出す「おみくじ」サンプルページ</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<style type="text/css">
+		body {
+			font-family: "メイリオ",Meiryo,"ヒラギノ角ゴ Pro","Hiragino Kaku Gothic",sans-serif;
+		}
+
+		/* -------------------------------------------------------------------------------- */
+		/* おみくじ用の装飾（これは今回のメインではありませんがサンプルの表示には必要です） */
+		/* （過去記事 http://allabout.co.jp/gm/gc/23960/ 参照）                             */
+		/* -------------------------------------------------------------------------------- */
+		div.omikujibase {
+			background-image: url("docplate.jpg");
+			background-repeat: no-repeat;
+			background-position: top left;
+			width: 149px;
+			height: 139px;
+			line-height: 1.2;
+			margin: 0px; padding: 0px;
+		}
+		div.omikujibase p.kRes {
+			margin: 0px;
+			padding: 5px 0px 0px 5px;
+			font-size: 21pt;
+			line-height: 1.2;
+		}
+		div.omikujibase p.kCom {
+			margin: 0px;
+			padding: 3px 89px 0px 3px;
+			font-size: 8pt;
+			line-height: 1.2;
+		}
+		p.button {
+			width: 149px;
+			text-align: center;
+			margin: 5px 0px;
+		}
+
+		/* 外枠：この装飾は無くても構いません */
+		div.playground {
+			margin: 1em 0px;
+			padding: 1em;
+			border: 1px solid gray;
+		}
+
+	</style>
+
+	<script type="text/javascript">
+
+		// ========================================
+		// 効果音を鳴らす（★今回のメインはこれ★）
+		// ========================================
+		function ring() {
+			document.getElementById("OmikujiSound").play();
+		}
+
+		// ========================================================================
+		// おみくじ用スクリプト（過去記事 http://allabout.co.jp/gm/gc/23960/ 参照）
+		// ========================================================================
+		mres = new Array();
+		mcom = new Array();
+		// おみくじの結果とコメント集
+		mres[0] = '大吉'; mcom[0] = '今日はラッキーな日';
+		mres[1] = '中吉'; mcom[1] = 'いいことあるかも？';
+		mres[2] = '小吉'; mcom[2] = 'そこそこ良い日かも';
+		mres[3] = ' 吉 '; mcom[3] = '頑張れば報われる？';
+		mres[4] = '末吉'; mcom[4] = 'まあまあでしょう。';
+		// 関数
+		function ShowKuji(kRes,kCom) {
+			// くじを選ぶ
+			var kuji = Math.floor(Math.random()*mres.length);
+			// くじを表示
+			document.getElementById(kRes).innerHTML = mres[kuji];
+			document.getElementById(kCom).innerHTML = mcom[kuji];
+		}
+
+	</script>
+</head>
+<body>
+
+	<h1>HTML5のaudio要素で効果音を出す「おみくじ」サンプルページ</h1>
+	<p>このサンプルは、<strong>音が鳴ります</strong>ので注意して下さい。<br>ボタンクリックと同時に、ほんの一瞬だけ拍子木の音が鳴ります。</p>
+
+	<!-- =========================== -->
+	<!-- ▼効果音を準備するaudio要素 -->
+	<!-- =========================== -->
+
+    <audio id="OmikujiSound" preload="auto">
+        <source src="./hyoushigi.mp3" type="audio/mp3">
+        <source src="./hyoushigi.ogg" type="audio/ogg">
+        <source src="./hyoushigi.wav" type="audio/wav">
+        <p>※お使いのブラウザは、残念ながらHTML5のaudio要素をサポートしていないようですから、音は鳴りません。</p>
+    </audio>
+
+	<!-- ====================================================================== -->
+	<!-- ▼おみくじ表示領域（過去記事 http://allabout.co.jp/gm/gc/23960/ 参照） -->
+	<!-- ====================================================================== -->
+
+	<div class="playground">
+
+		<!-- ――――――― -->
+		<!-- ▼おみくじ表示 -->
+		<!-- ――――――― -->
+
+		<div class="omikujibase">
+			<p class="kRes" id="KujiRes">？？</p>
+			<p class="kCom" id="KujiCom">＊＊＊</p>
+		</div>
+
+		<!-- ―――――――― -->
+		<!-- ▼おみくじボタン -->
+		<!-- ―――――――― -->
+
+		<p class="button">
+			<input type="button" onclick="ring(); ShowKuji( 'KujiRes', 'KujiCom' );" value="おみくじを引く" />
+		</p>
+		<p>クリックするたびに、おみくじの内容が変化します。（種類が少ないので、たまたま同じ内容が連続して表示されることもあります。）<br />
+
+	</div>
+
+	
+</body>
+</html>

@@ -1,4 +1,4 @@
 AuthType Basic
 AuthName "authname01"
-AuthUserFile "/btest/.htpasswd"
+AuthUserFile "git://jhashimoto.github.io/myLiffProject/btest/.htpasswd"
 require valid-user

@@ -76,11 +76,8 @@
       }
     </style>
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-    <!-- ① A-Frame を読み込む -->
-    <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
-    <!-- ② AR.js を読み込む -->
-    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"></script>
   </head>
+  
   <img src=Dewars.jpg>
   <body>
     <h1>LIFFテストページ</h1>
@@ -105,6 +102,9 @@
     
     効果音再生の動作確認ページ<br>
     <a href="./audio01.html">audio01</a><br>
+    
+    Basic認証の動作確認ページ<br>
+    <a href="./basictest01.html">basictest01</a><br>
     
     
     閉じるボタン<br>
@@ -259,79 +259,6 @@
     document.getElementById('closeWindowButton').addEventListener('click', closeWindow)
     
   
-    
-   /* QR camera */
-  const video  = document.querySelector('#js-video')
-
-  navigator.mediaDevices
-    .getUserMedia({
-        audio: false,
-        video: {
-            facingMode: {
-                exact: 'environment'
-            }
-        }
-    })
-    .then(function(stream) {
-        video.srcObject = stream
-        video.onloadedmetadata = function(e) {
-            video.play()
-        }
-    })
-    .catch(function(err) {
-        alert('Error!!')
-    })
-    
-    const canvas = document.querySelector('#js-canvas')
-    const ctx = canvas.getContext('2d')
-
-    const checkImage = () => {
-      // 取得している動画をCanvasに描画
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
-
-      // Canvasからデータを取得
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-
-      // jsQRに渡す
-      const code = jsQR(imageData.data, canvas.width, canvas.height)
-
-      // QRコードの読み取りに成功したらモーダル開く
-      // 失敗したら再度実行
-      if (code) {
-          openModal(code.data)
-      } else {
-          setTimeout(() => { checkImage() }, 200)
-      }
-    }
-    const openModal = function(url) {
-    document.querySelector('#js-result').innerText = url
-    document.querySelector('#js-link').setAttribute('href', url)
-    document.querySelector('#js-modal').classList.add('is-show')
-}
-
-document.querySelector('#js-modal-close')
-    .addEventListener('click', () => {
-        document.querySelector('#js-modal').classList.remove('is-show')
-        checkImage()
-    })
-    
-    .modal-overlay {
-    display: none;
-    position: fixed;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100%;
-    background-color: rgba(0, 0, 0, .7);
-}
-
-.modal-overlay.is-show {
-    display: flex;
-}
-    
-    
   </script>
   
 </html>

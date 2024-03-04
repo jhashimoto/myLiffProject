@@ -158,6 +158,9 @@
     LINE TagのCVの動作確認ページ<br>
     <a href="./btest/cvtest.html">cvtest01</a><br>
     
+
+    「ホーム画面に追加」<br>
+    <button class="btn" id="addToHomeScreenButton">AddToHomeScreen</button><br>
     
     閉じるボタン<br>
     <button class="btn" id="closeWindowButton">close</button><br>
@@ -295,10 +298,20 @@
         });
       };
     }
-     
+
+
+    /* ホーム画面追加 */
+    function addHomescreen() {
+      if (!liff.isInClient()) {
+        sendAlertIfNotInClient();
+      } else {
+          liff.createShortcutOnHomeScreen();
+      }
+    }
+    
     
     /* 閉じる */
-    閉じるボタン
+    
     function closeWindow() {
       if (!liff.isInClient()) {
         sendAlertIfNotInClient();
@@ -308,7 +321,9 @@
     }
    
     document.querySelector("#shareFriends").addEventListener("click", shareFriends)
+    document.getElementById('addToHomeScreenButton').addEventListener('click', addHomescreen)
     document.getElementById('closeWindowButton').addEventListener('click', closeWindow)
+
 
   </script>
   

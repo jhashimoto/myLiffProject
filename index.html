@@ -301,11 +301,16 @@
 
 
     /* ホーム画面追加 */
+    
     function addHomescreen() {
       if (!liff.isInClient()) {
         sendAlertIfNotInClient();
       } else {
-          liff.createShortcutOnHomeScreen();
+          liff
+            .createShortcutOnHomeScreen({
+              url: "https://miniapp.line.me/1655545182-O1dmK3vG",
+            })
+            .then(() => { /* ... */ });
       }
     }
     
